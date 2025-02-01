@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random.lamponescu.uk</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling with moving gradient background */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc, #6a11cb);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container for the content */
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animated title */
+        h1 {
+            font-size: 3rem;
+            color: white;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Input fields styling */
+        .input-group {
+            margin: 1.5rem 0;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            text-align: center;
+        }
+
+        /* Button styling */
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background: #45a049;
+            transform: scale(1.1);
+        }
+
+        /* Random number display */
+        #result {
+            margin-top: 1.5rem;
+            font-size: 2rem;
+            color: white;
+            animation: pop 0.5s ease;
+        }
+
+        /* Style for the generated number */
+        #result span {
+            color: #4CAF50; /* Bright green color */
+            font-weight: bold;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title -->
+        <h1>random.lamponescu.uk</h1>
+
+        <!-- Random Number Generator -->
+        <div class="input-group">
+            <label for="start">Start Number</label>
+            <input type="number" id="start" placeholder="Enter start number" value="1">
+        </div>
+        <div class="input-group">
+            <label for="end">End Number</label>
+            <input type="number" id="end" placeholder="Enter end number" value="100">
+        </div>
+        <button onclick="generateRandomNumber()">Generate Random Number</button>
+
+        <!-- Display Result -->
+        <div id="result">Random Number: <span></span></div>
+    </div>
+
+    <script>
+        // Function to generate a random number
+        function generateRandomNumber() {
+            const start = parseInt(document.getElementById('start').value);
+            const end = parseInt(document.getElementById('end').value);
+
+            if (isNaN(start) || isNaN(end)) {
+                alert("Please enter valid numbers!");
+                return;
+            }
+
+            if (start >= end) {
+                alert("Start number must be less than end number!");
+                return;
+            }
+
+            const randomNumber = Math.floor(Math.random() * (end - start + 1)) + start;
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `Random Number: <span>${randomNumber}</span>`;
+            resultElement.style.animation = 'none'; // Reset animation
+            setTimeout(() => resultElement.style.animation = 'pop 0.5s ease', 10); // Reapply animation
+        }
+    </script>
+</body>
+</html>
